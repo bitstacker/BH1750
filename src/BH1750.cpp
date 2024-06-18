@@ -105,7 +105,7 @@ bool BH1750::configure(Mode mode) {
 
   default:
     // Invalid measurement mode
-    Serial.println(F("[BH1750] ERROR: Invalid mode"));
+    //Serial.println(F("[BH1750] ERROR: Invalid mode"));
     break;
   }
 
@@ -116,19 +116,19 @@ bool BH1750::configure(Mode mode) {
     lastReadTimestamp = millis();
     return true;
   case 1: // too long for transmit buffer
-    Serial.println(F("[BH1750] ERROR: too long for transmit buffer"));
+    //Serial.println(F("[BH1750] ERROR: too long for transmit buffer"));
     break;
   case 2: // received NACK on transmit of address
-    Serial.println(F("[BH1750] ERROR: received NACK on transmit of address"));
+    //Serial.println(F("[BH1750] ERROR: received NACK on transmit of address"));
     break;
   case 3: // received NACK on transmit of data
-    Serial.println(F("[BH1750] ERROR: received NACK on transmit of data"));
+    //Serial.println(F("[BH1750] ERROR: received NACK on transmit of data"));
     break;
   case 4: // other error
-    Serial.println(F("[BH1750] ERROR: other error"));
+    //Serial.println(F("[BH1750] ERROR: other error"));
     break;
   default:
-    Serial.println(F("[BH1750] ERROR: undefined error"));
+    //Serial.println(F("[BH1750] ERROR: undefined error"));
     break;
   }
 
@@ -144,7 +144,7 @@ bool BH1750::configure(Mode mode) {
  */
 bool BH1750::setMTreg(byte MTreg) {
   if (MTreg < BH1750_MTREG_MIN || MTreg > BH1750_MTREG_MAX) {
-    Serial.println(F("[BH1750] ERROR: MTreg out of range"));
+    //Serial.println(F("[BH1750] ERROR: MTreg out of range"));
     return false;
   }
   byte ack = 5;
@@ -170,19 +170,19 @@ bool BH1750::setMTreg(byte MTreg) {
     BH1750_MTreg = MTreg;
     return true;
   case 1: // too long for transmit buffer
-    Serial.println(F("[BH1750] ERROR: too long for transmit buffer"));
+    //Serial.println(F("[BH1750] ERROR: too long for transmit buffer"));
     break;
   case 2: // received NACK on transmit of address
-    Serial.println(F("[BH1750] ERROR: received NACK on transmit of address"));
+    //Serial.println(F("[BH1750] ERROR: received NACK on transmit of address"));
     break;
   case 3: // received NACK on transmit of data
-    Serial.println(F("[BH1750] ERROR: received NACK on transmit of data"));
+    //Serial.println(F("[BH1750] ERROR: received NACK on transmit of data"));
     break;
   case 4: // other error
-    Serial.println(F("[BH1750] ERROR: other error"));
+    //Serial.println(F("[BH1750] ERROR: other error"));
     break;
   default:
-    Serial.println(F("[BH1750] ERROR: undefined error"));
+    //Serial.println(F("[BH1750] ERROR: undefined error"));
     break;
   }
 
@@ -239,7 +239,7 @@ bool BH1750::measurementReady(bool maxWait) {
 float BH1750::readLightLevel() {
 
   if (BH1750_MODE == UNCONFIGURED) {
-    Serial.println(F("[BH1750] Device is not configured!"));
+    //Serial.println(F("[BH1750] Device is not configured!"));
     return -2.0;
   }
 
@@ -260,17 +260,17 @@ float BH1750::readLightLevel() {
   if (level != -1.0) {
 // Print raw value if debug enabled
 #ifdef BH1750_DEBUG
-    Serial.print(F("[BH1750] Raw value: "));
-    Serial.println(level);
+    //Serial.print(F("[BH1750] Raw value: "));
+    //Serial.println(level);
 #endif
 
     if (BH1750_MTreg != BH1750_DEFAULT_MTREG) {
       level *= (float)((byte)BH1750_DEFAULT_MTREG / (float)BH1750_MTreg);
 // Print MTreg factor if debug enabled
 #ifdef BH1750_DEBUG
-      Serial.print(F("[BH1750] MTreg factor: "));
-      Serial.println(
-          String((float)((byte)BH1750_DEFAULT_MTREG / (float)BH1750_MTreg)));
+      //Serial.print(F("[BH1750] MTreg factor: "));
+      //Serial.println(
+      //    String((float)((byte)BH1750_DEFAULT_MTREG / (float)BH1750_MTreg)));
 #endif
     }
     if (BH1750_MODE == BH1750::ONE_TIME_HIGH_RES_MODE_2 ||
@@ -282,8 +282,8 @@ float BH1750::readLightLevel() {
 
 // Print converted value if debug enabled
 #ifdef BH1750_DEBUG
-    Serial.print(F("[BH1750] Converted float value: "));
-    Serial.println(level);
+    //Serial.print(F("[BH1750] Converted float value: "));
+    //Serial.println(level);
 #endif
   }
 
